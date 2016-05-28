@@ -37,14 +37,20 @@ public class TicTacToe {
 		System.out.println("Player X please make your move.");
 		int inputRow = keys.nextInt();
 		int inputCol = keys.nextInt();
-		if (array[inputRow][inputCol] == '*') {
-			array[inputRow][inputCol] = 'X';
-			counter++;
+		if ((inputRow >= 0 && inputRow <= 2)&&(inputCol >= 0 && inputCol <= 2)) {
+			if (array[inputRow][inputCol] == '*') {
+				array[inputRow][inputCol] = 'X';
+				counter++;
+				}
+			else {
+				System.out.println("That space is taken! Choose again...");
+				makeMove2(board);
+				}
 			}
 		else {
-			System.out.println("That space is taken! Choose again...");
+			System.out.println("That's not on the grid! Try again...");
 			makeMove2(board);
-			}
+			}			
 		}		
 	
 	public static void makeMove1(char[][] array) {
@@ -52,14 +58,20 @@ public class TicTacToe {
 		System.out.println("Player O please make your move.");
 		int inputRow = keys.nextInt();
 		int inputCol = keys.nextInt();
-		if (array[inputRow][inputCol] == '*') {
-			array[inputRow][inputCol] = 'O';
-			counter++;
+		if ((inputRow >= 0 && inputRow <= 2)&&(inputCol >= 0 && inputCol <= 2)) {
+			if (array[inputRow][inputCol] == '*') {
+				array[inputRow][inputCol] = 'O';
+				counter++;
+				}
+			else {
+				System.out.println("That space is taken! Choose again...");
+				makeMove2(board);
+				}
 			}
 		else {
-			System.out.println("That space is taken! Choose again...");
+			System.out.println("That's not on the grid! Try again...");
 			makeMove1(board);
-			}
+			}				
 		}
 		
 	public static boolean victoryConditions(char[][] b) {
@@ -102,19 +114,35 @@ public class TicTacToe {
 		}	
 		
 	public static void game() {
+		Scanner keys = new Scanner(System.in);
+		String i;
 		setUp(board);
 		updateBoard(board);
 		int countMoves = 1;
 		while (countMoves <= maxMoves) {
 			if (victoryConditions(board)) {
 				System.out.println("The game is over!!!");
+				System.out.println("Play again?");
+				i = keys.next();
+				if (i.equalsIgnoreCase("yes")) {
+					game();
+					}
+				else {	
 				System.exit(0);
+					}
 				}
 			turn();
 			countMoves++;
 			}
 		System.out.println("No contest...");
-		System.exit(0);			
+		System.out.println("Play again?");
+		i = keys.next();
+		if (i.equalsIgnoreCase("yes")) {
+					game();
+					}
+				else {	
+				System.exit(0);
+					}		
 		}	
 	
 	public static void main(String[] args) {
